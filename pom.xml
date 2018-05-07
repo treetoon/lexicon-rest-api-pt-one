@@ -4,11 +4,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.al</groupId>
-    <artifactId>rest-api</artifactId>
+    <artifactId>lexicon-rest-api-pt-one</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>jar</packaging>
 
-    <name>rest-api</name>
+    <name>lexicon-rest-api-pt-one</name>
     <description>Project for Spring MVC REST - PART ONE</description>
 
     <parent>
