@@ -1,4 +1,4 @@
-package com.al.restapi.base.data.model; //model/domain
+package com.al.restapi.base.model; //model/domain
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,5 +11,5 @@ public class FilmEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-
+    //does spring use get setters?
 }

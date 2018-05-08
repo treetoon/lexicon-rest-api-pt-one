@@ -1,6 +1,6 @@
 package com.al.restapi.base.service.film;
 
-import com.al.restapi.base.data.repository.FilmRepository;
+import com.al.restapi.base.repository.FilmRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
