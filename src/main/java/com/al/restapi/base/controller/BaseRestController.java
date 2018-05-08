@@ -1,4 +1,4 @@
-package com.al.restapi.controller;
+package com.al.restapi.base.controller;
 
 import org.springframework.web.bind.annotation.*;
 
@@ -9,7 +9,13 @@ import java.util.List;
 @RequestMapping("/rest-api")
 public class BaseRestController {
 
-    @GetMapping("/greeting/{x}")
+    @GetMapping("/g")
+    public int func(){
+        return 123456;
+    }
+
+
+    @GetMapping("/g/{x}")
     public List<String> func(@RequestParam(value="namn", defaultValue="World") String name,
                              @PathVariable("x") int i){
         List<String> str = new ArrayList<>();
@@ -22,7 +28,7 @@ public class BaseRestController {
         return str;
     }
 
-    @PostMapping("/greeting")
+    @PostMapping("/g")
     public String func2(@RequestParam(value="namn", defaultValue="World") String name){
         return "Hello2" + " : " + name;
     }
