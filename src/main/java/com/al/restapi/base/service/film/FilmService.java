@@ -5,5 +5,6 @@ import com.al.restapi.base.model.FilmEntity;
 import java.util.List;
 
 public interface FilmService {
-    List<FilmEntity> getAllFilms();
+    List<FilmEntity> findAllFilms();
+    FilmEntity saveFilm(FilmEntity filmEntity);
 }

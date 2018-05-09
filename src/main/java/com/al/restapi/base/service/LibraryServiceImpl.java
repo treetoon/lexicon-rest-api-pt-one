@@ -11,15 +11,17 @@ import java.util.List;
 @Service
 public class LibraryServiceImpl implements LibraryService {
     private FilmService filmService;
-    private FilmRepository filmRepository;
 
     @Autowired
-    public LibraryServiceImpl(FilmService filmService, FilmRepository filmRepository) {
+    public LibraryServiceImpl(FilmService filmService) {
         this.filmService = filmService;
-        this.filmRepository = filmRepository;
     }
 
-    public List<FilmEntity> getAllFilms(){
-        return filmService.getAllFilms();
+    public List<FilmEntity> findAllFilms(){
+        return filmService.findAllFilms();
+    }
+
+    public FilmEntity saveFilm(FilmEntity filmEntity){
+        return filmService.saveFilm(filmEntity);
     }
 }

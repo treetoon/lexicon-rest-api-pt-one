@@ -1,12 +1,11 @@
 package com.al.restapi.base.controller.rest;
 
 import com.al.restapi.base.model.FilmEntity;
-import com.al.restapi.base.repository.FilmRepository;
 import com.al.restapi.base.service.LibraryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -20,31 +19,25 @@ public class FilmRestController {
         this.lib = lib;
     }
 
-    @GetMapping
+    @GetMapping("/film")
     public List<FilmEntity> getAllFilms(){
-        return lib.getAllFilms();
+        return lib.findAllFilms();
+    }
+
+    @PostMapping("/film")
+    public FilmEntity saveFilm(@Valid @RequestBody FilmEntity filmEntity){
+        return lib.saveFilm(filmEntity);
     }
 
 
 
 
 
+    //test
 
     @GetMapping("/g/{x}")
-    public List<String> func(@RequestParam(value="namn", defaultValue="World") String name,
-                             @PathVariable("x") int i){
-        List<String> str = new ArrayList<>();
-        str.add("asd");
-        str.add("asd2");
-        str.add(name);
-
-        System.out.println(i);
-
-        return str;
-    }
-
-    @PostMapping("/g")
-    public String func2(@RequestParam(value="namn", defaultValue="World") String name){
-        return "Hello2" + " : " + name;
+    public String func(@RequestParam(value="namn", defaultValue="World") String name,
+                                                            @PathVariable("x") int i){
+        return "123";
     }
 }

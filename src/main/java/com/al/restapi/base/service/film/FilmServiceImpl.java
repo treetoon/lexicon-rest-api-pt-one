@@ -12,13 +12,15 @@ public class FilmServiceImpl implements FilmService {
     @Autowired
     private FilmRepository repo;
 
-
-
     public FilmServiceImpl()
     {
     }
 
-    public List<FilmEntity> getAllFilms(){
+    public List<FilmEntity> findAllFilms(){
         return repo.findAll();
+    }
+
+    public FilmEntity saveFilm(FilmEntity filmEntity){
+        return repo.save(filmEntity);
     }
 }
