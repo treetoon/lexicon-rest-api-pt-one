@@ -4,6 +4,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 
 @Entity
+@Table(name = "Member")
 public class MemberEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,15 +20,13 @@ public class MemberEntity {
     private LoanEntity loanEntity;
 
     /*/////////////////////////////
-    set/getters for db assignment
+    set/getters for spring bean db assignment:
+    effectively choose which fields are settable
+    and which are retrievable by the client
     /////////////////////////////*/
 
     public Long getMemberId() {
         return memberId;
-    }
-
-    public void setMemberId(Long memberId) {
-        this.memberId = memberId;
     }
 
     public String getName() {

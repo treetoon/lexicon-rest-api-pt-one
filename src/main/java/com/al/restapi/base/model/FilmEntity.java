@@ -6,6 +6,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 @Entity
+@Table(name = "Film")
 public class FilmEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,27 +25,21 @@ public class FilmEntity {
     private String pos;
 
     @NotNull
+    @Min(0)
+    private Integer loanedCopies;
+
+    @NotNull
     @Min(1)
-    private Integer amount; //total books
+    private Integer copies;
 
     /*/////////////////////////////
-    set/getters for db assignment
+    set/getters for spring bean db assignment:
+    effectively choose which fields are settable
+    and which are retrievable by the client
     /////////////////////////////*/
 
     public Long getFilmId() {
         return filmId;
-    }
-
-    public void setFilmId(Long filmId) {
-        this.filmId = filmId;
-    }
-
-    public Integer getAmount() {
-        return amount;
-    }
-
-    public void setAmount(Integer amount) {
-        this.amount = amount;
     }
 
     public String getTitle() {
@@ -77,5 +72,21 @@ public class FilmEntity {
 
     public void setPos(String pos) {
         this.pos = pos;
+    }
+
+    public Integer getLoanedCopies() {
+        return loanedCopies;
+    }
+
+    public void setLoanedCopies(Integer loanedCopies) {
+        this.loanedCopies = loanedCopies;
+    }
+
+    public Integer getCopies() {
+        return copies;
+    }
+
+    public void setCopies(Integer copies) {
+        this.copies = copies;
     }
 }

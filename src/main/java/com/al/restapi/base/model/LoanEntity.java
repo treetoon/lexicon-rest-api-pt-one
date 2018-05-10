@@ -8,6 +8,7 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
+@Table(name = "Loan")
 public class LoanEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,15 +26,13 @@ public class LoanEntity {
     private List<FilmEntity> filmEntity;
 
     /*/////////////////////////////
-    set/getters for db assignment
+    set/getters for spring bean db assignment:
+    effectively choose which fields are settable
+    and which are retrievable by the client
     /////////////////////////////*/
 
     public Long getLoanId() {
         return loanId;
-    }
-
-    public void setLoanId(Long loanId) {
-        this.loanId = loanId;
     }
 
     public Date getCreatedDate() {
