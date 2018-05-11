@@ -10,4 +10,6 @@ public interface FilmService {
     Optional<FilmEntity> findFilmById(Long id);
 
     List<FilmEntity> saveFilm(List<FilmEntity> filmEntity);
+    void deleteFilmById(Long id);
+    Optional<FilmEntity> updateFilmById(Long id, FilmEntity newFilm);
 }

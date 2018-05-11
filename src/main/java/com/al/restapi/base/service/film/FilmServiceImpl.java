@@ -47,4 +47,26 @@ public class FilmServiceImpl implements FilmService {
     public Optional<FilmEntity> findFilmById(Long id) {
         return repo.findById(id);
     }
+
+    @Override
+    public void deleteFilmById(Long id) {
+        repo.deleteById(id);
+    }
+
+    @Override
+    public Optional<FilmEntity> updateFilmById(Long id, FilmEntity newFilm) {
+        Optional<FilmEntity> currentFilm = repo.findById(id);
+
+        if(currentFilm.isPresent() && newFilm != null){
+            currentFilm.get().setTitle(newFilm.getTitle());
+            currentFilm.get().setISBN(newFilm.getISBN());
+            currentFilm.get().setGenre(newFilm.getGenre());
+            currentFilm.get().setPos(newFilm.getPos());
+            currentFilm.get().setLoanedCopies(newFilm.getLoanedCopies());
+            currentFilm.get().setCopies(newFilm.getCopies());
+
+            repo.save(currentFilm.get());
+        }
+        return currentFilm; //returns updated film
+    }
 }
