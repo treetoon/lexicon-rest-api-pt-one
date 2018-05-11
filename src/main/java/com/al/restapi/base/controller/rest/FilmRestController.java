@@ -3,6 +3,8 @@ package com.al.restapi.base.controller.rest;
 import com.al.restapi.base.model.FilmEntity;
 import com.al.restapi.base.service.film.FilmService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -55,11 +57,28 @@ public class FilmRestController {
         return filmService.saveFilm(filmEntity);
     }
 
+    /**
+     * PUT /film/{id}
+     * Updates one film object based on specified id
+     * @param id id number of film object
+     * @param newFilm supplied film object used to update the db
+     * @return updated film object from the db of the specified id
+     */
+    @PutMapping("film/{id}")
+    public Optional<FilmEntity> updateFilmById(@PathVariable Long id,
+                                               @RequestBody FilmEntity newFilm){
+        return filmService.updateFilmById(id, newFilm);
+    }
 
-    //@PutMapping
-
-
-
-    //update
-    //delete
+    /**
+     * DELETE /film/{id}
+     * Deletes one film object based on specified id
+     * @param id id number of film object
+     * @return ?
+     */
+    @DeleteMapping("/film/{id}")
+    public ResponseEntity<?> deleteFilmById(@PathVariable Long id){
+        filmService.deleteFilmById(id);
+        return ResponseEntity.ok().build();
+    }
 }
