@@ -2,6 +2,7 @@ package com.al.restapi.base.controller.rest;
 
 import com.al.restapi.base.model.FilmEntity;
 import com.al.restapi.base.service.film.FilmService;
+import com.al.restapi.exception.FilmNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
@@ -40,16 +41,20 @@ public class FilmRestController {
 //        return filmService.findFilms(title, genre);
 //    }
     @GetMapping("/film")
-    public ResponseEntity<List<FilmEntity>> findFilms(@RequestParam(required = false) String title,
-                                                      @RequestParam(required = false) String genre){
+    public ResponseEntity findFilms(@RequestParam(required = false) String title,
+                                    @RequestParam(required = false) String genre){
+        HttpHeaders headers = new HttpHeaders();
+        headers.set("MyResponseHeader", "MyValue");
 
-        HttpHeaders responseHeaders = new HttpHeaders();
-        responseHeaders.set("MyResponseHeader", "MyValue");
-
-        return new ResponseEntity<>(filmService.findFilms(title, genre),
-                                    responseHeaders,
-                                    HttpStatus.ACCEPTED);
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .headers(headers)
+                .body(filmService.findFilms(title, genre));
     }
+
+    @ResponseStatus(value = HttpStatus.NOT_FOUND, reason = "asdasd")
+    @ExceptionHandler(FilmNotFoundException.class)
+    public void rule(){}
 
     /**
      * GET /film/{id}
