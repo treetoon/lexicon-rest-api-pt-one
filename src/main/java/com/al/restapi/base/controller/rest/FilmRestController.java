@@ -2,7 +2,7 @@ package com.al.restapi.base.controller.rest;
 
 import com.al.restapi.base.model.FilmEntity;
 import com.al.restapi.base.service.film.FilmService;
-import com.al.restapi.exception.FilmNotFoundException;
+import com.al.restapi.base.service.film.FilmNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
@@ -26,6 +26,7 @@ public class FilmRestController {
     //TODO HttpEntity<?> or annotation: return status
     //TODO Pagination?
     //TODO error handling
+    //TODO Header?
 
     /**
      * GET /film
@@ -35,14 +36,9 @@ public class FilmRestController {
      * @param genre film genre
      * @return list of film objects from the db
      */
-//    @GetMapping("/film")
-//    public List<FilmEntity> findFilms(@RequestParam(required = false) String title,
-//                                      @RequestParam(required = false) String genre){
-//        return filmService.findFilms(title, genre);
-//    }
     @GetMapping("/film")
     public ResponseEntity findFilms(@RequestParam(required = false) String title,
-                                    @RequestParam(required = false) String genre){
+                                    @RequestParam(required = false) String genre) throws FilmNotFoundException {
         HttpHeaders headers = new HttpHeaders();
         headers.set("MyResponseHeader", "MyValue");
 
@@ -51,10 +47,6 @@ public class FilmRestController {
                 .headers(headers)
                 .body(filmService.findFilms(title, genre));
     }
-
-    @ResponseStatus(value = HttpStatus.NOT_FOUND, reason = "asdasd")
-    @ExceptionHandler(FilmNotFoundException.class)
-    public void rule(){}
 
     /**
      * GET /film/{id}
@@ -100,5 +92,14 @@ public class FilmRestController {
     public ResponseEntity<?> deleteFilmById(@PathVariable Long id){
         filmService.deleteFilmById(id);
         return ResponseEntity.ok().build();
+    }
+
+    @ExceptionHandler(FilmNotFoundException.class)
+    public ResponseEntity filmNotFoundExceptionHandler(Exception e){
+        ErrorInformation error = new ErrorInformation(e.getMessage());
+
+        return ResponseEntity
+                .status(HttpStatus.NOT_FOUND)
+                .body(error);
     }
 }

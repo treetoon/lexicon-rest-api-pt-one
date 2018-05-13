@@ -26,16 +26,36 @@ public class FilmServiceImpl implements FilmService {
      * @return a list of film objects
      */
     @Override
-    public List<FilmEntity> findFilms(String title, String genre){
+    public List<FilmEntity> findFilms(String title, String genre) throws FilmNotFoundException {
 
-        if(genre != null && title != null)
-            return repo.findByTitleAndGenre(title, genre);
-        else if(title != null)
-            return repo.findByTitle(title);
-        else if(genre != null)
-            return repo.findByGenre(genre);
-        else
-            return repo.findAll();
+        if(genre != null && title != null) {
+            if (repo.findByTitleAndGenre(title, genre).isEmpty()) {
+                throw new FilmNotFoundException("Title (" + title + "), Genre (" + genre +
+                        "), search could not find any results...");
+            } else {
+                return repo.findByTitleAndGenre(title, genre);
+            }
+        }else if(title != null) {
+            if (repo.findByTitle(title).isEmpty()) {
+                throw new FilmNotFoundException("Title (" + title +
+                        "), search could not find any results...");
+            } else {
+                return repo.findByTitle(title);
+            }
+        }else if(genre != null) {
+            if (repo.findByGenre(genre).isEmpty()) {
+                throw new FilmNotFoundException("Genre (" + genre +
+                        "), search could not find any results...");
+            } else {
+                return repo.findByGenre(genre);
+            }
+        }else {
+            if (repo.findAll().isEmpty()) {
+                throw new FilmNotFoundException("Film list is empty...");
+            } else {
+                return repo.findAll();
+            }
+        }
     }
 
     @Override
