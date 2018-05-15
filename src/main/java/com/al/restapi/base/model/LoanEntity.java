@@ -9,6 +9,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "Loan")
+@Embeddable
 public class LoanEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

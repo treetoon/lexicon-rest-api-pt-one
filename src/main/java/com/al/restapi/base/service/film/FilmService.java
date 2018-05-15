@@ -7,9 +7,9 @@ import java.util.Optional;
 
 public interface FilmService {
     List<FilmEntity> findFilms(String title, String genre) throws FilmNotFoundException;
-    Optional<FilmEntity> findFilmById(Long id);
+    Optional<FilmEntity> findFilmById(Long id) throws FilmNotFoundException;
 
-    List<FilmEntity> saveFilm(List<FilmEntity> filmEntity);
+    List<FilmEntity> saveFilm(List<FilmEntity> filmEntity) throws FilmNotFoundException;
     void deleteFilmById(Long id);
-    Optional<FilmEntity> updateFilmById(Long id, FilmEntity newFilm);
+    Optional<FilmEntity> updateFilmById(Long id, FilmEntity newFilm) throws FilmNotFoundException;
 }

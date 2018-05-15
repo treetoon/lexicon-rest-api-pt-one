@@ -59,22 +59,35 @@ public class FilmServiceImpl implements FilmService {
     }
 
     @Override
-    public List<FilmEntity> saveFilm(List<FilmEntity> filmEntity){
-        return repo.saveAll(filmEntity);
+    public Optional<FilmEntity> findFilmById(Long id) throws FilmNotFoundException {
+        if (repo.findById(id).isPresent())
+            return repo.findById(id);
+        else
+            throw new FilmNotFoundException("Film id is out of range...");
     }
 
     @Override
-    public Optional<FilmEntity> findFilmById(Long id) {
-        return repo.findById(id);
+    public List<FilmEntity> saveFilm(List<FilmEntity> filmEntity) throws FilmNotFoundException {
+        if(!repo.saveAll(filmEntity).isEmpty())
+            return repo.saveAll(filmEntity);
+        else
+            throw new FilmNotFoundException("No films in the list.");
     }
 
     @Override
-    public void deleteFilmById(Long id) {
+    public void deleteFilmById(Long id){
         repo.deleteById(id);
     }
 
+    /**
+     * Updates the selected film based on id
+     * @param id id of film to be updated
+     * @param newFilm new film object used to update
+     * @return updated film object
+     * @throws FilmNotFoundException
+     */
     @Override
-    public Optional<FilmEntity> updateFilmById(Long id, FilmEntity newFilm) {
+    public Optional<FilmEntity> updateFilmById(Long id, FilmEntity newFilm) throws FilmNotFoundException {
         Optional<FilmEntity> currentFilm = repo.findById(id);
 
         if(currentFilm.isPresent() && newFilm != null){
@@ -86,7 +99,9 @@ public class FilmServiceImpl implements FilmService {
             currentFilm.get().setCopies(newFilm.getCopies());
 
             repo.save(currentFilm.get());
+            return currentFilm; //returns updated film
+        }else{
+            throw new FilmNotFoundException("Could not update film...");
         }
-        return currentFilm; //returns updated film
     }
 }

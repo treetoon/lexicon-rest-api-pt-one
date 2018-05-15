@@ -16,7 +16,7 @@ public class MemberEntity {
     @NotBlank
     private String address;
 
-    @OneToOne
+    @Embedded
     private LoanEntity loanEntity;
 
     /*/////////////////////////////

@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 
+import javax.transaction.Transactional;
 import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
@@ -22,11 +23,8 @@ public class FilmRestController {
         this.filmService = filmService;
     }
 
-    //TODO return Optional<?>?
-    //TODO HttpEntity<?> or annotation: return status
     //TODO Pagination?
-    //TODO error handling
-    //TODO Header?
+    //TODO Transaction
 
     /**
      * GET /film
@@ -40,7 +38,7 @@ public class FilmRestController {
     public ResponseEntity findFilms(@RequestParam(required = false) String title,
                                     @RequestParam(required = false) String genre) throws FilmNotFoundException {
         HttpHeaders headers = new HttpHeaders();
-        headers.set("MyResponseHeader", "MyValue");
+        //headers.set("MyResponseHeader", "MyValue");
 
         return ResponseEntity
                 .status(HttpStatus.OK)
@@ -55,8 +53,10 @@ public class FilmRestController {
      * @return film object from the db of the specified id
      */
     @GetMapping("/film/{id}")
-    public Optional<FilmEntity> findFilmById(@PathVariable Long id){
-        return filmService.findFilmById(id);
+    public ResponseEntity findFilmById(@PathVariable Long id) throws FilmNotFoundException {
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(filmService.findFilmById(id));
     }
 
     /**
@@ -65,8 +65,10 @@ public class FilmRestController {
      * @return list of film objects that were added
      */
     @PostMapping("/film")
-    public List<FilmEntity> saveFilm(@Valid @RequestBody List<FilmEntity> filmEntity){
-        return filmService.saveFilm(filmEntity);
+    public ResponseEntity saveFilm(@Valid @RequestBody List<FilmEntity> filmEntity) throws FilmNotFoundException {
+        return ResponseEntity
+                .status(HttpStatus.CREATED)
+                .body(filmService.saveFilm(filmEntity));
     }
 
     /**
@@ -77,9 +79,11 @@ public class FilmRestController {
      * @return updated film object from the db of the specified id
      */
     @PutMapping("film/{id}")
-    public Optional<FilmEntity> updateFilmById(@PathVariable Long id,
-                                               @RequestBody FilmEntity newFilm){
-        return filmService.updateFilmById(id, newFilm);
+    public ResponseEntity updateFilmById(@PathVariable Long id,
+                                               @RequestBody FilmEntity newFilm) throws FilmNotFoundException {
+        return ResponseEntity
+                .status(HttpStatus.METHOD_NOT_ALLOWED)
+                .body(filmService.updateFilmById(id, newFilm));
     }
 
     /**
@@ -89,10 +93,14 @@ public class FilmRestController {
      * @return ?
      */
     @DeleteMapping("/film/{id}")
-    public ResponseEntity<?> deleteFilmById(@PathVariable Long id){
+    public ResponseEntity deleteFilmById(@PathVariable Long id) {
         filmService.deleteFilmById(id);
-        return ResponseEntity.ok().build();
+        return ResponseEntity
+                .status(HttpStatus.METHOD_NOT_ALLOWED)
+                .build();
     }
+
+    //ExceptionHandler
 
     @ExceptionHandler(FilmNotFoundException.class)
     public ResponseEntity filmNotFoundExceptionHandler(Exception e){

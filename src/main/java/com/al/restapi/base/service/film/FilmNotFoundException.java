@@ -1,6 +1,11 @@
 package com.al.restapi.base.service.film;
 
 public class FilmNotFoundException extends Exception {
+
+    public FilmNotFoundException()
+    {
+    }
+
     public FilmNotFoundException(String message) {
         super(message);
     }
