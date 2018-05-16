@@ -5,12 +5,11 @@ import com.al.restapi.base.service.film.FilmService;
 import com.al.restapi.base.service.film.FilmNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
-import javax.transaction.Transactional;
 import javax.validation.Valid;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/rest-api")
@@ -24,7 +23,6 @@ public class FilmRestController {
     }
 
     //TODO Pagination?
-    //TODO Transaction
 
     /**
      * GET /film
@@ -65,6 +63,7 @@ public class FilmRestController {
      * @return list of film objects that were added
      */
     @PostMapping("/film")
+    @Transactional
     public ResponseEntity saveFilm(@Valid @RequestBody List<FilmEntity> filmEntity) throws FilmNotFoundException {
         return ResponseEntity
                 .status(HttpStatus.CREATED)
@@ -79,10 +78,11 @@ public class FilmRestController {
      * @return updated film object from the db of the specified id
      */
     @PutMapping("film/{id}")
+    @Transactional
     public ResponseEntity updateFilmById(@PathVariable Long id,
-                                               @RequestBody FilmEntity newFilm) throws FilmNotFoundException {
+                                         @Valid @RequestBody FilmEntity newFilm) throws FilmNotFoundException {
         return ResponseEntity
-                .status(HttpStatus.METHOD_NOT_ALLOWED)
+                .status(HttpStatus.OK)
                 .body(filmService.updateFilmById(id, newFilm));
     }
 
@@ -93,21 +93,11 @@ public class FilmRestController {
      * @return ?
      */
     @DeleteMapping("/film/{id}")
+    @Transactional
     public ResponseEntity deleteFilmById(@PathVariable Long id) {
         filmService.deleteFilmById(id);
         return ResponseEntity
-                .status(HttpStatus.METHOD_NOT_ALLOWED)
+                .status(HttpStatus.OK)
                 .build();
-    }
-
-    //ExceptionHandler
-
-    @ExceptionHandler(FilmNotFoundException.class)
-    public ResponseEntity filmNotFoundExceptionHandler(Exception e){
-        ErrorInformation error = new ErrorInformation(e.getMessage());
-
-        return ResponseEntity
-                .status(HttpStatus.NOT_FOUND)
-                .body(error);
     }
 }

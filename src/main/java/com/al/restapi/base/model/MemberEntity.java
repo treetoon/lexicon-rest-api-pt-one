@@ -2,6 +2,7 @@ package com.al.restapi.base.model;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import java.util.List;
 
 @Entity
 @Table(name = "Member")
@@ -16,14 +17,18 @@ public class MemberEntity {
     @NotBlank
     private String address;
 
-    @Embedded
-    private LoanEntity loanEntity;
+    @OneToMany
+    private List<LoanEntity> loanEntity;
 
     /*/////////////////////////////
     set/getters for spring bean db assignment:
     effectively choose which fields are settable
     and which are retrievable by the client
     /////////////////////////////*/
+
+    public MemberEntity()
+    {
+    }
 
     public Long getMemberId() {
         return memberId;
@@ -45,11 +50,11 @@ public class MemberEntity {
         this.address = address;
     }
 
-    public LoanEntity getLoanEntity() {
+    public List<LoanEntity> getLoanEntity() {
         return loanEntity;
     }
 
-    public void setLoanEntity(LoanEntity loanEntity) {
+    public void setLoanEntity(List<LoanEntity> loanEntity) {
         this.loanEntity = loanEntity;
     }
 }

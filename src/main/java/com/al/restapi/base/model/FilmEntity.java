@@ -38,6 +38,10 @@ public class FilmEntity {
     and which are retrievable by the client
     /////////////////////////////*/
 
+    public FilmEntity()
+    {
+    }
+
     public Long getFilmId() {
         return filmId;
     }

@@ -9,7 +9,6 @@ import java.util.List;
 
 @Entity
 @Table(name = "Loan")
-@Embeddable
 public class LoanEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -32,8 +31,8 @@ public class LoanEntity {
     and which are retrievable by the client
     /////////////////////////////*/
 
-    public Long getLoanId() {
-        return loanId;
+    public LoanEntity()
+    {
     }
 
     public Date getCreatedDate() {

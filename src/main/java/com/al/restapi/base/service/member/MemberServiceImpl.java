@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class MemberServiceImpl implements MemberService {
@@ -17,21 +18,59 @@ public class MemberServiceImpl implements MemberService {
         this.repo = repo;
     }
 
-
-    public List<MemberEntity> findMembers(String title) throws MemberNotFoundException {
-        if (title != null) {
-            if (repo.findByGenre(title).isEmpty()) {
-                throw new MemberNotFoundException("Genre (" + genre +
+    @Override
+    public List<MemberEntity> findMembers(String name) throws MemberNotFoundException {
+        if (name != null) {
+            if (repo.findByName(name).isEmpty()) {
+                throw new MemberNotFoundException("Name (" + name +
                         "), search could not find any results...");
             } else {
-                return repo.findByGenre(genre);
+                return repo.findByName(name);
             }
         } else {
             if (repo.findAll().isEmpty()) {
-                throw new MemberNotFoundException("Film list is empty...");
+                throw new MemberNotFoundException("Member list is empty...");
             } else {
                 return repo.findAll();
             }
         }
+    }
+
+    @Override
+    public Optional<MemberEntity> findMemberById(Long id) throws MemberNotFoundException {
+        if (repo.findById(id).isPresent())
+            return repo.findById(id);
+        else
+            throw new MemberNotFoundException("Member id is out of range...");
+    }
+
+    @Override
+    public List<MemberEntity> saveMember(List<MemberEntity> memberEntity) throws MemberNotFoundException {
+        if(!repo.saveAll(memberEntity).isEmpty())
+            return repo.saveAll(memberEntity);
+        else
+            throw new MemberNotFoundException("No members in the list...");
+    }
+
+    @Override
+    public Optional<MemberEntity> updateMemberById(Long id, MemberEntity newMember) throws MemberNotFoundException {
+        Optional<MemberEntity> currentMember = repo.findById(id);
+
+        if(currentMember.isPresent() && newMember != null){
+            currentMember.get().setName(newMember.getName());
+            currentMember.get().setAddress(newMember.getAddress());
+            currentMember.get().setLoanEntity(newMember.getLoanEntity());
+
+            repo.save(currentMember.get());
+            return currentMember; //returns updated film
+        }else{
+            throw new MemberNotFoundException("Could not update member...");
+        }
+    }
+
+
+    @Override
+    public void deleteMemberById(Long id){
+        repo.deleteById(id);
     }
 }

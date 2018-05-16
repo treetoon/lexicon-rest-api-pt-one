@@ -71,12 +71,7 @@ public class FilmServiceImpl implements FilmService {
         if(!repo.saveAll(filmEntity).isEmpty())
             return repo.saveAll(filmEntity);
         else
-            throw new FilmNotFoundException("No films in the list.");
-    }
-
-    @Override
-    public void deleteFilmById(Long id){
-        repo.deleteById(id);
+            throw new FilmNotFoundException("No films in the list...");
     }
 
     /**
@@ -103,5 +98,10 @@ public class FilmServiceImpl implements FilmService {
         }else{
             throw new FilmNotFoundException("Could not update film...");
         }
+    }
+
+    @Override
+    public void deleteFilmById(Long id){
+        repo.deleteById(id);
     }
 }
