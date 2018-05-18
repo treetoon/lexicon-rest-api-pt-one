@@ -23,6 +23,7 @@ public class FilmRestController {
     }
 
     //TODO Pagination?
+    //TODO Empty Mappings return methods
 
     /**
      * GET /film
@@ -86,6 +87,9 @@ public class FilmRestController {
                 .body(filmService.updateFilmById(id, newFilm));
     }
 
+    @PutMapping
+    public ResponseEntity updateFilmsDisabled(){ return ResponseEntity.status(HttpStatus.METHOD_NOT_ALLOWED).build(); }
+
     /**
      * DELETE /film/{id}
      * Deletes one film object based on specified id
@@ -100,4 +104,7 @@ public class FilmRestController {
                 .status(HttpStatus.OK)
                 .build();
     }
+
+    @DeleteMapping
+    public ResponseEntity deleteFilmsDisabled(){ return ResponseEntity.status(HttpStatus.METHOD_NOT_ALLOWED).build(); }
 }

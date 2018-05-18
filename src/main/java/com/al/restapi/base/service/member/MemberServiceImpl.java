@@ -45,9 +45,9 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
-    public List<MemberEntity> saveMember(List<MemberEntity> memberEntity) throws MemberNotFoundException {
-        if(!repo.saveAll(memberEntity).isEmpty())
-            return repo.saveAll(memberEntity);
+    public List<MemberEntity> saveMember(List<MemberEntity> member) throws MemberNotFoundException {
+        if(!repo.saveAll(member).isEmpty())
+            return repo.saveAll(member);
         else
             throw new MemberNotFoundException("No members in the list...");
     }
@@ -59,7 +59,6 @@ public class MemberServiceImpl implements MemberService {
         if(currentMember.isPresent() && newMember != null){
             currentMember.get().setName(newMember.getName());
             currentMember.get().setAddress(newMember.getAddress());
-            currentMember.get().setLoanEntity(newMember.getLoanEntity());
 
             repo.save(currentMember.get());
             return currentMember; //returns updated film
@@ -67,7 +66,6 @@ public class MemberServiceImpl implements MemberService {
             throw new MemberNotFoundException("Could not update member...");
         }
     }
-
 
     @Override
     public void deleteMemberById(Long id){

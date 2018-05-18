@@ -4,7 +4,7 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
@@ -14,16 +14,17 @@ public class LoanEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long loanId;
 
-    @Temporal(TemporalType.TIMESTAMP) //date conversion between java and db types
     @CreatedDate
-    private Date createdDate;
+    private LocalDateTime createdDate;
 
-    @Temporal(TemporalType.TIMESTAMP)
     @LastModifiedDate
-    private Date modifiedDate;
+    private LocalDateTime modifiedDate;
 
     @OneToMany
-    private List<FilmEntity> filmEntity;
+    private List<FilmEntity> filmList;
+
+    @ManyToOne
+    private MemberEntity member;
 
     /*/////////////////////////////
     set/getters for spring bean db assignment:
@@ -35,27 +36,39 @@ public class LoanEntity {
     {
     }
 
-    public Date getCreatedDate() {
+    public Long getLoanId() {
+        return loanId;
+    }
+
+    public LocalDateTime getCreatedDate() {
         return createdDate;
     }
 
-    public void setCreatedDate(Date createdDate) {
+    public void setCreatedDate(LocalDateTime createdDate) {
         this.createdDate = createdDate;
     }
 
-    public Date getModifiedDate() {
+    public LocalDateTime getModifiedDate() {
         return modifiedDate;
     }
 
-    public void setModifiedDate(Date modifiedDate) {
+    public void setModifiedDate(LocalDateTime modifiedDate) {
         this.modifiedDate = modifiedDate;
     }
 
-    public List<FilmEntity> getFilmEntity() {
-        return filmEntity;
+    public List<FilmEntity> getFilmList() {
+        return filmList;
     }
 
-    public void setFilmEntity(List<FilmEntity> filmEntity) {
-        this.filmEntity = filmEntity;
+    public void setFilmList(List<FilmEntity> filmList) {
+        this.filmList = filmList;
+    }
+
+    public MemberEntity getMember() {
+        return member;
+    }
+
+    public void setMember(MemberEntity member) {
+        this.member = member;
     }
 }

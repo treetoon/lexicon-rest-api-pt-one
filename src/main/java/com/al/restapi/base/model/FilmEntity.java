@@ -8,6 +8,9 @@ import javax.validation.constraints.NotNull;
 @Entity
 @Table(name = "Film")
 public class FilmEntity {
+
+    //TODO Cascading?
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long filmId;
@@ -15,7 +18,7 @@ public class FilmEntity {
     @NotBlank
     private String title;
 
-    @NotBlank //create special JPA annotation?
+    @NotBlank //TODO create special JPA annotation?
     private String ISBN;
 
     @NotBlank //create special JPA annotation?

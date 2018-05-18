@@ -17,9 +17,6 @@ public class MemberEntity {
     @NotBlank
     private String address;
 
-    @OneToMany
-    private List<LoanEntity> loanEntity;
-
     /*/////////////////////////////
     set/getters for spring bean db assignment:
     effectively choose which fields are settable
@@ -50,11 +47,11 @@ public class MemberEntity {
         this.address = address;
     }
 
-    public List<LoanEntity> getLoanEntity() {
-        return loanEntity;
-    }
-
-    public void setLoanEntity(List<LoanEntity> loanEntity) {
-        this.loanEntity = loanEntity;
-    }
+//    public List<LoanEntity> getLoanList() {
+//        return loanList;
+//    }
+//
+//    public void setLoanList(List<LoanEntity> loanList) {
+//        this.loanList = loanList;
+//    }
 }
