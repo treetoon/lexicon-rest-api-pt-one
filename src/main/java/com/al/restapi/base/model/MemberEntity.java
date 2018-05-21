@@ -1,6 +1,7 @@
 package com.al.restapi.base.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import java.util.List;
 
@@ -16,6 +17,9 @@ public class MemberEntity {
 
     @NotBlank
     private String address;
+
+    @Email
+    private String email;
 
     /*/////////////////////////////
     set/getters for spring bean db assignment:
@@ -47,11 +51,11 @@ public class MemberEntity {
         this.address = address;
     }
 
-//    public List<LoanEntity> getLoanList() {
-//        return loanList;
-//    }
-//
-//    public void setLoanList(List<LoanEntity> loanList) {
-//        this.loanList = loanList;
-//    }
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
 }

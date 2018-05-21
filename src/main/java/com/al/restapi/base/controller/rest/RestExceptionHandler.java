@@ -1,6 +1,7 @@
 package com.al.restapi.base.controller.rest;
 
 import com.al.restapi.base.service.film.FilmNotFoundException;
+import com.al.restapi.base.service.loan.LoanNotFoundException;
 import com.al.restapi.base.service.member.MemberNotFoundException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -13,7 +14,8 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 @ControllerAdvice
 public class RestExceptionHandler extends ResponseEntityExceptionHandler {
 
-    @ExceptionHandler(value = { FilmNotFoundException.class, MemberNotFoundException.class })
+    @ExceptionHandler(value = { FilmNotFoundException.class,
+            MemberNotFoundException.class, LoanNotFoundException.class})
     protected ResponseEntity itemNotFoundExceptionHandler(Exception e, WebRequest request) {
         String bodyOfResponse = e.getMessage();
 

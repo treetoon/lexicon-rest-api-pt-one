@@ -90,8 +90,6 @@ public class FilmServiceImpl implements FilmService {
             currentFilm.get().setISBN(newFilm.getISBN());
             currentFilm.get().setGenre(newFilm.getGenre());
             currentFilm.get().setPos(newFilm.getPos());
-            currentFilm.get().setLoanedCopies(newFilm.getLoanedCopies());
-            currentFilm.get().setCopies(newFilm.getCopies());
 
             repo.save(currentFilm.get());
             return currentFilm; //returns updated film

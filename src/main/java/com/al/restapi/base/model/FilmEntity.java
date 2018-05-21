@@ -15,6 +15,8 @@ public class FilmEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long filmId;
 
+    private Boolean isLoaned = false;
+
     @NotBlank
     private String title;
 
@@ -26,14 +28,6 @@ public class FilmEntity {
 
     @NotBlank //create special JPA annotation?
     private String pos;
-
-    @NotNull
-    @Min(0)
-    private Integer loanedCopies;
-
-    @NotNull
-    @Min(1)
-    private Integer copies;
 
     /*/////////////////////////////
     set/getters for spring bean db assignment:
@@ -81,19 +75,11 @@ public class FilmEntity {
         this.pos = pos;
     }
 
-    public Integer getLoanedCopies() {
-        return loanedCopies;
+    public Boolean getLoaned() {
+        return isLoaned;
     }
 
-    public void setLoanedCopies(Integer loanedCopies) {
-        this.loanedCopies = loanedCopies;
-    }
-
-    public Integer getCopies() {
-        return copies;
-    }
-
-    public void setCopies(Integer copies) {
-        this.copies = copies;
+    public void setLoaned(Boolean loaned) {
+        isLoaned = loaned;
     }
 }

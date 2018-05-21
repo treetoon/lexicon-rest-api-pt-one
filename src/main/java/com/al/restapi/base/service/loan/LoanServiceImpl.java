@@ -51,31 +51,44 @@ public class LoanServiceImpl implements LoanService {
     @Override
     public Optional<LoanEntity> createLoan(Long memberId, List<FilmEntity> filmList) throws Exception {
 
+        //if input vars exists
         if(memberId != null && filmList != null) {
 
             LoanEntity loan = new LoanEntity();
 
-            //add films
+            //add films to loan
             if (!filmList.isEmpty()) {
                 List<FilmEntity> temp = new ArrayList<>();
 
                 for (FilmEntity film : filmList) {
-                    if (filmRepository.findById(film.getFilmId()).isPresent()) {
+
+                    //if film exists and film is not loaned already
+                    if (filmRepository.findById(film.getFilmId()).isPresent()
+                            && !filmRepository.findById(film.getFilmId()).get().getLoaned())
+                    {
                         temp.add(filmRepository.findById(film.getFilmId()).get());
+                    }else {
+                        throw new FilmNotFoundException("Film in list is already loaned or could not be found...");
                     }
                 }
+
+                //set films as loaned
+                for (FilmEntity film : temp){
+                    film.setLoaned(true);
+                }
+
                 loan.setFilmList(temp); //save film list in loan
             } else {
-                throw new FilmNotFoundException();
+                throw new FilmNotFoundException("Films could not be loaned...");
             }
 
             //if id of object matches in repo, assume equal; i.e, no field-by-field comparison
-            //add member
+            //add member to loan
             if (memberRepository.findById(memberId).isPresent()) {
                 MemberEntity temp = memberRepository.findById(memberId).get();
                 loan.setMember(temp);
             } else {
-                throw new MemberNotFoundException();
+                throw new MemberNotFoundException("Could not find member...");
             }
 
             return Optional.of(loanRepository.save(loan));

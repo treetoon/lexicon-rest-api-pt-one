@@ -15,10 +15,10 @@ public class LoanEntity {
     private Long loanId;
 
     @CreatedDate
-    private LocalDateTime createdDate;
+    private LocalDateTime loanDate;
 
     @LastModifiedDate
-    private LocalDateTime modifiedDate;
+    private LocalDateTime returnDate;
 
     @OneToMany
     private List<FilmEntity> filmList;
@@ -40,20 +40,20 @@ public class LoanEntity {
         return loanId;
     }
 
-    public LocalDateTime getCreatedDate() {
-        return createdDate;
+    public LocalDateTime getLoanDate() {
+        return loanDate;
     }
 
-    public void setCreatedDate(LocalDateTime createdDate) {
-        this.createdDate = createdDate;
+    public void setLoanDate(LocalDateTime loanDate) {
+        this.loanDate = loanDate;
     }
 
-    public LocalDateTime getModifiedDate() {
-        return modifiedDate;
+    public LocalDateTime getReturnDate() {
+        return returnDate;
     }
 
-    public void setModifiedDate(LocalDateTime modifiedDate) {
-        this.modifiedDate = modifiedDate;
+    public void setReturnDate(LocalDateTime returnDate) {
+        this.returnDate = returnDate;
     }
 
     public List<FilmEntity> getFilmList() {
