@@ -1,13 +1,15 @@
 <!DOCTYPE html SYSTEM "https://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
 <html lang="en" xmlns:th="http://www.thymeleaf.org" th:insert="~{include :: page}">
-<head th:fragment="headerinclude">
+<head th:fragment="fragments/document/head :: headFragment">
     <meta charset="UTF-8">
+    <!-- <title>${pagetitle}</title> ??? -->
+    <title id="pageTitle">Index Title</title>
 </head>
-<body th:fragment="include">
-    <header th:insert="~{fragments/header :: header}"></header>
+<body th:fragment="bodyFragment">
+    <header th:insert="~{fragments/body/header :: headerFragment}"></header>
     <main>
         <h1>H1</h1>
     </main>
-    <footer th:insert="~{fragments/footer :: footer}"></footer>
+    <footer th:insert="~{fragments/body/footer :: footerFragment}"></footer>
 </body>
 </html>
