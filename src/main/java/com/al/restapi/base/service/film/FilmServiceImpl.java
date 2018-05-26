@@ -50,11 +50,16 @@ public class FilmServiceImpl implements FilmService {
                 return repo.findByGenre(genre);
             }
         }else {
-            if (repo.findAll().isEmpty()) {
-                throw new FilmNotFoundException("Film list is empty...");
-            } else {
-                return repo.findAll();
-            }
+            return findFilms();
+        }
+    }
+
+    @Override
+    public List<FilmEntity> findFilms() throws FilmNotFoundException {
+        if (repo.findAll().isEmpty()) {
+            throw new FilmNotFoundException("Film list is empty...");
+        } else {
+            return repo.findAll();
         }
     }
 
