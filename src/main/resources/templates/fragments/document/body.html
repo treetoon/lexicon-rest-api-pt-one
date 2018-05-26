@@ -1,14 +1,14 @@
 <!DOCTYPE html SYSTEM "https://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
-<html class="no-js" lang="" xmlns:th="http://www.thymeleaf.org" th:fragment="page">
+<html class="no-js" lang="" xmlns:th="http://www.thymeleaf.org">
 
-<body>
+<body th:fragment="bodyFragment">
 <!--[if lte IE 9]>
 <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade
     your browser</a> to improve your experience and security.</p>
 <![endif]-->
 
-<!-- inserts page here -->
-<div th:insert="~{this :: include}"></div>
+<!-- replaces this div with the page -->
+<div th:replace="~{this :: page}"></div>
 
 <script src="js/vendor/modernizr-3.6.0.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"
