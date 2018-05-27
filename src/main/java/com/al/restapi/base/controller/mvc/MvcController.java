@@ -25,9 +25,7 @@ public class MvcController {
     public String getTest(Model m) {
         try {
             m.addAttribute("filmList", filmService.findFilms());
-        } catch (FilmNotFoundException e) {
-            e.printStackTrace();
-        }
+        } catch (FilmNotFoundException e) {} //dw
         return "film";
     }
 }
