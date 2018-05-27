@@ -6,11 +6,41 @@
 </head>
 <body th:include="fragments/document/body :: bodyFragment">
     <div th:fragment="page">
-        <header th:insert="~{fragments/body/header :: headerFragment}"></header>
-        <main>
-            <h1>INDEX</h1>
+        <header th:replace="~{fragments/body/header :: headerFragment}"></header>
+        <main role="main">
+            <!-- Main jumbotron for a primary marketing message or call to action -->
+            <div class="jumbotron">
+                <div class="container">
+                    <h1 class="display-3">Lexicon Film Database</h1>
+                    <img src="img/2001.png">
+                </div>
+            </div>
+
+            <div class="container">
+                <!-- Example row of columns -->
+                <div class="row">
+                    <div class="col-md-4">
+                        <h2>Films</h2>
+                        <p>View all films in the library.</p>
+                        <p><a class="btn btn-secondary" href="/film" role="button">More &raquo;</a></p>
+                    </div>
+                    <div class="col-md-4">
+                        <h2>Members</h2>
+                        <p>View all registered members.</p>
+                        <p><a class="btn btn-secondary" href="/member" role="button">More &raquo;</a></p>
+                    </div>
+                    <div class="col-md-4">
+                        <h2>Loan</h2>
+                        <p>Manage loans in the library.</p>
+                        <p><a class="btn btn-secondary" href="/loan" role="button">More &raquo;</a></p>
+                    </div>
+                </div>
+
+                <hr>
+
+            </div> <!-- /container -->
         </main>
-        <footer th:insert="~{fragments/body/footer :: footerFragment}"></footer>
+        <footer th:replace="~{fragments/body/footer :: footerFragment}"></footer>
     </div>
 </body>
 </html>

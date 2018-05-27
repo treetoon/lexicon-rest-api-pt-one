@@ -14,7 +14,6 @@ html {
     color: #222;
     font-size: 1em;
     line-height: 1.4;
-    background-color: deeppink;
 }
 
 /*
@@ -98,16 +97,23 @@ textarea {
    Author's custom styles
    ========================================================================== */
 
+body {
+  padding-top: 3.5rem;
+}
 
+img {
+  width: 100%;
+}
 
+.display-3 {
+  text-align: center;
+  padding-bottom: .6em;
+}
 
-
-
-
-
-
-
-
+footer {
+  text-align: center;
+  padding-top: 4em;
+}
 
 
 
