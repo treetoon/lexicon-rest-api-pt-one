@@ -14,11 +14,21 @@
                     <li class="nav-item"> <!-- .active -->
                         <a class="nav-link" href="/">Home<span class="sr-only">(current)</span></a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/film">Films</a>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="/film" id="dropdown-film" data-toggle="dropdown"
+                           aria-haspopup="true" aria-expanded="false">Films</a>
+                        <div class="dropdown-menu" aria-labelledby="dropdown-film">
+                            <a class="dropdown-item" href="/film">Film List</a>
+                            <a class="dropdown-item" href="/film-add">Add Film</a>
+                        </div>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/member">Members</a>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="/member" id="dropdown-member"
+                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Members</a>
+                        <div class="dropdown-menu" aria-labelledby="dropdown-member">
+                            <a class="dropdown-item" href="#">Action</a>
+                            <a class="dropdown-item" href="#">Another action</a>
+                        </div>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/loan">Loan</a>

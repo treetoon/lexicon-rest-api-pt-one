@@ -101,6 +101,10 @@ body {
   padding-top: 3.5rem;
 }
 
+main {
+  padding: 1em 2em;
+}
+
 img {
   width: 100%;
 }
@@ -115,7 +119,13 @@ footer {
   padding-top: 4em;
 }
 
+table {
+  width: 100%;
+}
 
+.hide {
+  display:none;
+}
 
 
 

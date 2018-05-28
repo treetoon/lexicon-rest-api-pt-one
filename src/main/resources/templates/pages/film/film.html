@@ -8,8 +8,31 @@
 <div th:fragment="page">
     <header th:insert="~{fragments/body/header :: headerFragment}"></header>
     <main>
-        <a href="/film/list">Film List</a>
-        <a href="/film/add">Add a film</a>
+        <h1>Film List</h1>
+        <table>
+            <tr>
+                <th>Title</th>
+                <th>Genre</th>
+                <th>ISBN</th>
+                <th>Position</th>
+                <th>Loaned?</th>
+            </tr>
+            <th:block th:each="film : ${filmList}" th:method="GET">
+                <tr>
+                    <td th:text="${film.title}"></td>
+                    <td th:text="${film.genre}"></td>
+                    <td th:text="${film.ISBN}"></td>
+                    <td th:text="${film.pos}"></td>
+                    <td th:text="${film.loaned}"></td>
+                    <td class="hide" th:text="${film.filmId}"></td>
+                    <td>
+                        <form th:method="DELETE" th:action="@{/film/} + ${film.filmId}">
+                            <button type="submit" name="submit" value="value" class="link-button">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+            </th:block>
+        </table>
     </main>
     <footer th:insert="~{fragments/body/footer :: footerFragment}"></footer>
 </div>
