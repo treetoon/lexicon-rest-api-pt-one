@@ -10,7 +10,7 @@
     <main>
         <h1>Film Database</h1>
 
-        <form action="/rest-api/film" method="post">
+        <form action="/film-add" method="post">
             <div>
                 <label for="title">Title:</label>
                 <input type="text" id="title" name="title">
@@ -19,13 +19,10 @@
                 <label for="genre">Genre:</label>
                 <input type="text" id="genre" name="genre">
             </div>
+            <div>
+                <input type="submit" value="Submit"/>
+            </div>
         </form>
-
-        <th:block th:each="film : ${filmList}">
-            <tr>
-                <td th:text="${film.title}"></td>
-            </tr>
-        </th:block>
     </main>
     <footer th:insert="~{fragments/body/footer :: footerFragment}"></footer>
 </div>
