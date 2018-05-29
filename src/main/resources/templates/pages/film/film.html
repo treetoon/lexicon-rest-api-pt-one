@@ -7,32 +7,37 @@
 <body th:include="fragments/document/body :: bodyFragment">
 <div th:fragment="page">
     <header th:insert="~{fragments/body/header :: headerFragment}"></header>
-    <main>
-        <h1>Film List</h1>
-        <table>
-            <tr>
-                <th>Title</th>
-                <th>Genre</th>
-                <th>ISBN</th>
-                <th>Position</th>
-                <th>Loaned?</th>
-            </tr>
-            <th:block th:each="film : ${filmList}" th:method="GET">
+    <main role="main">
+        <div class="container">
+            <h1>Film List</h1>
+            <table>
                 <tr>
-                    <td th:text="${film.title}"></td>
-                    <td th:text="${film.genre}"></td>
-                    <td th:text="${film.ISBN}"></td>
-                    <td th:text="${film.pos}"></td>
-                    <td th:text="${film.loaned}"></td>
-                    <td class="hide" th:text="${film.filmId}"></td>
-                    <td>
-                        <form th:method="DELETE" th:action="@{/film/} + ${film.filmId}">
-                            <button type="submit" name="submit" value="value" class="link-button">Delete</button>
-                        </form>
-                    </td>
+                    <th>Title</th>
+                    <th>Genre</th>
+                    <th>ISBN</th>
+                    <th>Position</th>
+                    <th>Loaned?</th>
                 </tr>
-            </th:block>
-        </table>
+                <th:block th:each="film : ${filmList}" th:method="GET">
+                    <tr>
+                        <td th:text="${film.title}"></td>
+                        <td th:text="${film.genre}"></td>
+                        <td th:text="${film.ISBN}"></td>
+                        <td th:text="${film.pos}"></td>
+                        <td th:text="${film.loaned}"></td>
+                        <td class="hide" th:text="${film.filmId}"></td>
+                        <td>
+                            <form th:action="@{/film(id=${film.filmId})}" th:method="DELETE">
+                                <button type="submit" name="submit" value="delete" class="link-button">Delete</button>
+                            </form>
+                            <form th:action="@{/film-add}" th:method="GET">
+                                <button type="submit" name="submit" value="edit" class="link-button">Edit</button>
+                            </form>
+                        </td>
+                    </tr>
+                </th:block>
+            </table>
+        </div>
     </main>
     <footer th:insert="~{fragments/body/footer :: footerFragment}"></footer>
 </div>

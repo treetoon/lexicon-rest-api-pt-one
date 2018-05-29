@@ -6,9 +6,7 @@ import com.al.restapi.base.service.film.FilmService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class FilmMvcController {
@@ -35,7 +33,31 @@ public class FilmMvcController {
         return "pages/film/film";
     }
 
+    @DeleteMapping("/film")
+    public String deleteFilm(Model model, @RequestParam Long id) {
+        try {
+            filmService.deleteFilmById(id);
+            model.addAttribute("filmList", filmService.findFilms());
+        } catch (FilmNotFoundException e) {
+            model.addAttribute("Error: ", e.getMessage());
+            return "pages/film/film";
+        }
+        return "pages/film/film";
+    }
 
+    @GetMapping("/film-add")
+    public String addFilm(Model model, @RequestParam Long id) {
+        try {
+            model.addAttribute("film", filmService.findFilmById(id));
+        } catch (FilmNotFoundException e) {
+            model.addAttribute("Error: ", e.getMessage());
+            return "pages/film/film-add";
+        }
+        return "pages/film/film-add";
+    }
+
+    @PutMapping
+    //
 
 
 
