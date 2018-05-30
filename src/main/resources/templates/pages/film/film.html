@@ -17,6 +17,7 @@
                     <th>ISBN</th>
                     <th>Position</th>
                     <th>Loaned?</th>
+                    <th></th>
                 </tr>
                 <th:block th:each="film : ${filmList}" th:method="GET">
                     <tr>
@@ -27,11 +28,11 @@
                         <td th:text="${film.loaned}"></td>
                         <td class="hide" th:text="${film.filmId}"></td>
                         <td>
-                            <form th:action="@{/film(id=${film.filmId})}" th:method="DELETE">
-                                <button type="submit" name="submit" value="delete" class="link-button">Delete</button>
+                            <form class="buttons" th:action="@{/film-add(id=${film.filmId})}" th:method="POST">
+                                <button type="submit" name="edit" value="edit" class="link-button">Edit</button>
                             </form>
-                            <form th:action="@{/film-add}" th:method="GET">
-                                <button type="submit" name="submit" value="edit" class="link-button">Edit</button>
+                            <form class="buttons" th:action="@{/film(id=${film.filmId})}" th:method="DELETE">
+                                <button type="submit" name="delete" value="delete" class="link-button">Delete</button>
                             </form>
                         </td>
                     </tr>

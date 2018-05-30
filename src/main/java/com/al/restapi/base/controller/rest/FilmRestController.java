@@ -77,7 +77,7 @@ public class FilmRestController {
      * @param newFilm supplied film object used to update the db
      * @return updated film object from the db of the specified id
      */
-    @PutMapping("film/{id}")
+    @PutMapping("/film/{id}")
     @Transactional
     public ResponseEntity updateFilmById(@PathVariable Long id,
                                          @Valid @RequestBody FilmEntity newFilm) throws FilmNotFoundException {

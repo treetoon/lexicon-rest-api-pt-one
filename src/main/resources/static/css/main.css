@@ -124,7 +124,11 @@ table {
 }
 
 .hide {
-  display:none;
+  display: none;
+}
+
+.buttons {
+  display: table-cell;
 }
 
 

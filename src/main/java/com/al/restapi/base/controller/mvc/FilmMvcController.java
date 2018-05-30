@@ -45,7 +45,7 @@ public class FilmMvcController {
         return "pages/film/film";
     }
 
-    @GetMapping("/film-add")
+    @PostMapping("/film-add")
     public String addFilm(Model model, @RequestParam Long id) {
         try {
             model.addAttribute("film", filmService.findFilmById(id));
@@ -56,23 +56,9 @@ public class FilmMvcController {
         return "pages/film/film-add";
     }
 
-    @PutMapping
-    //
-
-
-
-
-    @GetMapping("/film/add")
-    public String getFilmAdd(Model m) {
-        try {
-            m.addAttribute("filmList", filmService.findFilms());
-        } catch (FilmNotFoundException e) {} //dw
-        return "pages/film/film-add";
-    }
-
-    @PostMapping("/film/add")
-    public String postFilmAdd(Model m, FilmEntity film) {
-        System.out.println(film.getTitle());
-        return "pages/film/film-add";
-    }
+//    @PostMapping("/film-add")
+//    public String postFilmAdd(Model m, FilmEntity film) {
+//        System.out.println(film.getTitle());
+//        return "pages/film/film-add";
+//    }
 }
