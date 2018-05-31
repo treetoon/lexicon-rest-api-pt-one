@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:include="fragments/document/head :: headFragment">
     <meta charset="UTF-8">
-    <title id="pageTitle">Film</title>
+    <title id="pageTitle">Lexicon - Films</title>
 </head>
 <body th:include="fragments/document/body :: bodyFragment">
 <div th:fragment="page">
@@ -28,7 +28,7 @@
                         <td th:text="${film.loaned}"></td>
                         <td class="hide" th:text="${film.filmId}"></td>
                         <td>
-                            <form class="buttons" th:action="@{/film-add(id=${film.filmId})}" th:method="POST">
+                            <form class="buttons" th:action="@{/film-edit(id=${film.filmId})}" th:method="POST">
                                 <button type="submit" name="edit" value="edit" class="link-button">Edit</button>
                             </form>
                             <form class="buttons" th:action="@{/film(id=${film.filmId})}" th:method="DELETE">

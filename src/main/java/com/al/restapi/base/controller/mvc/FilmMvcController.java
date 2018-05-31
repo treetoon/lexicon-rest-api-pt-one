@@ -8,6 +8,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 @Controller
 public class FilmMvcController {
     private FilmService filmService;
@@ -18,7 +20,7 @@ public class FilmMvcController {
     }
 
     @GetMapping({"/", "/index"})
-    public String getIndex(Model m){
+    public String getIndex(Model model){
         return "index";
     }
 
@@ -45,20 +47,26 @@ public class FilmMvcController {
         return "pages/film/film";
     }
 
-    @PostMapping("/film-add")
-    public String addFilm(Model model, @RequestParam Long id) {
+    @PostMapping("/film")
+    public String editFilmSave(Model model, @Valid FilmEntity film, Long id) {
+        try {
+            filmService.updateFilmById(id, film);
+            model.addAttribute("filmList", filmService.findFilms());
+        } catch (FilmNotFoundException e) {
+            model.addAttribute("Error: ", e.getMessage());
+            return "pages/film/film";
+        }
+        return "pages/film/film";
+    }
+
+    @PostMapping("/film-edit")
+    public String editFilm(Model model, @RequestParam Long id) {
         try {
             model.addAttribute("film", filmService.findFilmById(id));
         } catch (FilmNotFoundException e) {
             model.addAttribute("Error: ", e.getMessage());
-            return "pages/film/film-add";
+            return "pages/film/film-edit";
         }
-        return "pages/film/film-add";
+        return "pages/film/film-edit";
     }
-
-//    @PostMapping("/film-add")
-//    public String postFilmAdd(Model m, FilmEntity film) {
-//        System.out.println(film.getTitle());
-//        return "pages/film/film-add";
-//    }
 }
