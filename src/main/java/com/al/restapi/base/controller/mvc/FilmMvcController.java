@@ -87,7 +87,7 @@ public class FilmMvcController {
             model.addAttribute("filmList", filmService.findFilms());
         } catch (FilmNotFoundException e) {
             model.addAttribute("Error: ", e.getMessage());
-            return "pages/film/film";
+            return "pages/film/film-add";
         }
         return "pages/film/film";
     }

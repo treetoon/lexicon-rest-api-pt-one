@@ -11,20 +11,27 @@
         <div class="container">
             <h1>Loan</h1>
             <table>
-                <tr>
-                    <th>Loan Id</th>
-                    <th>Loan Date</th>
-                    <th>Return Date</th>
-                    <th>Films</th>
-                    <th>Member</th>
-                </tr>
                 <th:block th:each="loan : ${loanList}" th:method="GET">
+                    <tr>
+                        <th>Loan Id</th>
+                        <th>Loan Date</th>
+                        <th>Return Date</th>
+
+                        <th th:each="film : ${loan.filmList}">Film</th>
+
+                        <th>Member</th>
+                        <th>Member Id</th>
+                    </tr>
+
                     <tr>
                         <td th:text="${loan.loanId}"></td>
                         <td th:text="${loan.loanDate}"></td>
                         <td th:text="${loan.returnDate}"></td>
-                        <td th:text="${loan.filmList}"></td>
-                        <td th:text="${loan.member}"></td>
+
+                        <td th:each="film : ${loan.filmList}" th:text="${film.title}"></td>
+
+                        <td th:text="${loan.member.getName()}"></td>
+                        <td th:text="${loan.member.getMemberId()}"></td>
                     </tr>
                 </th:block>
             </table>

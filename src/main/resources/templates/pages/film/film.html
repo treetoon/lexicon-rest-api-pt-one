@@ -11,15 +11,16 @@
         <div class="container">
             <h1>Film List</h1>
             <table>
-                <tr>
-                    <th>Title</th>
-                    <th>Genre</th>
-                    <th>ISBN</th>
-                    <th>Position</th>
-                    <th>Loaned?</th>
-                    <th></th>
-                </tr>
                 <th:block th:each="film : ${filmList}" th:method="GET">
+                    <tr>
+                        <th>Title</th>
+                        <th>Genre</th>
+                        <th>ISBN</th>
+                        <th>Position</th>
+                        <th>Loaned?</th>
+                        <th></th>
+                    </tr>
+
                     <tr>
                         <td th:text="${film.title}"></td>
                         <td th:text="${film.genre}"></td>
