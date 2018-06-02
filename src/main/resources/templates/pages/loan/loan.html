@@ -1,0 +1,36 @@
+<!DOCTYPE html SYSTEM "https://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:include="fragments/document/head :: headFragment">
+    <meta charset="UTF-8">
+    <title id="pageTitle">Lexicon - Loan</title>
+</head>
+<body th:include="fragments/document/body :: bodyFragment">
+<div th:fragment="page">
+    <header th:insert="~{fragments/body/header :: headerFragment}"></header>
+    <main role="main">
+        <div class="container">
+            <h1>Loan</h1>
+            <table>
+                <tr>
+                    <th>Loan Id</th>
+                    <th>Loan Date</th>
+                    <th>Return Date</th>
+                    <th>Films</th>
+                    <th>Member</th>
+                </tr>
+                <th:block th:each="loan : ${loanList}" th:method="GET">
+                    <tr>
+                        <td th:text="${loan.loanId}"></td>
+                        <td th:text="${loan.loanDate}"></td>
+                        <td th:text="${loan.returnDate}"></td>
+                        <td th:text="${loan.filmList}"></td>
+                        <td th:text="${loan.member}"></td>
+                    </tr>
+                </th:block>
+            </table>
+        </div>
+    </main>
+    <footer th:insert="~{fragments/body/footer :: footerFragment}"></footer>
+</div>
+</body>
+</html>

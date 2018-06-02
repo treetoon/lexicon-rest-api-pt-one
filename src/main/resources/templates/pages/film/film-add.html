@@ -1,0 +1,40 @@
+<!DOCTYPE html SYSTEM "https://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:include="fragments/document/head :: headFragment">
+    <meta charset="UTF-8">
+    <title id="pageTitle">Lexicon - Add Film</title>
+</head>
+<body th:include="fragments/document/body :: bodyFragment">
+<div th:fragment="page">
+    <header th:insert="~{fragments/body/header :: headerFragment}"></header>
+    <main>
+        <div class="container">
+            <h1>Add Film</h1>
+
+            <form th:action="@{/film-add}" method="POST">
+                <div>
+                    <label for="title">Title:</label>
+                    <input type="text" id="title" th:name="title">
+                </div>
+                <div>
+                    <label for="genre">Genre:</label>
+                    <input type="text" id="genre" th:name="genre">
+                </div>
+                <div>
+                    <label for="isbn">ISBN:</label>
+                    <input type="text" id="isbn" th:name="ISBN">
+                </div>
+                <div>
+                    <label for="position">Position:</label>
+                    <input type="text" id="position" th:name="pos">
+                </div>
+                <div>
+                    <input type="submit" value="Submit"/>
+                </div>
+            </form>
+        </div>
+    </main>
+    <footer th:insert="~{fragments/body/footer :: footerFragment}"></footer>
+</div>
+</body>
+</html>

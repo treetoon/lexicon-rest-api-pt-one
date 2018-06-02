@@ -98,11 +98,11 @@ textarea {
    ========================================================================== */
 
 body {
-  padding-top: 3.5rem;
+  padding-top: 2rem;
 }
 
 main {
-  padding: 1em 2em;
+  padding: 2em 2em;
 }
 
 img {
@@ -131,7 +131,13 @@ table {
   display: table-cell;
 }
 
+form div label {
+  width: 5em;
+}
 
+form div input {
+  margin-top: 1em;
+}
 
 
 /* ==========================================================================

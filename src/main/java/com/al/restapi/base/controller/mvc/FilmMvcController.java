@@ -9,6 +9,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 public class FilmMvcController {
@@ -68,5 +70,25 @@ public class FilmMvcController {
             return "pages/film/film-edit";
         }
         return "pages/film/film-edit";
+    }
+
+    @GetMapping("/film-add")
+    public String addFilm(Model model) {
+        return "pages/film/film-add";
+    }
+
+    @PostMapping("/film-add")
+    public String addFilm(Model model, @Valid FilmEntity film) {
+        try {
+            List<FilmEntity> temp = new ArrayList<>();
+            temp.add(film);
+
+            filmService.saveFilm(temp);
+            model.addAttribute("filmList", filmService.findFilms());
+        } catch (FilmNotFoundException e) {
+            model.addAttribute("Error: ", e.getMessage());
+            return "pages/film/film";
+        }
+        return "pages/film/film";
     }
 }

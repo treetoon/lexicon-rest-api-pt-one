@@ -2,13 +2,13 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:include="fragments/document/head :: headFragment">
     <meta charset="UTF-8">
-    <title id="pageTitle">Lexicon - Films</title>
+    <title id="pageTitle">Lexicon - Edit Film</title>
 </head>
 <body th:include="fragments/document/body :: bodyFragment">
 <div th:fragment="page">
     <header th:insert="~{fragments/body/header :: headerFragment}"></header>
     <main>
-        <h1>Editing</h1>
+        <h1>Editing Film</h1>
 
         <form th:action="@{/film}" th:object="${film}" method="POST">
             <div>
