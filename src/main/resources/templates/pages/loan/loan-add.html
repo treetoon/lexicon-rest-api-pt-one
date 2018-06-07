@@ -11,14 +11,21 @@
         <div class="container">
             <h1>Create Loan</h1>
 
-            <form th:action="@{/loan-add}" method="POST">
+            <form th:action="@{/loan-add}" method="POST" th:object="${selectedFilms}">
                 <h4>Select Multiple Films</h4>
-                <select multiple size="10">
-                    <option th:each="film : ${filmList}" th:text="${film.title}" th:value="film"></option>
-                </select>
 
-                <div>
-                    <input type="submit" value="Submit"/>
+                <ul>
+                    <li th:each="film : ${filmList}">
+                        <div class="ui checkbox">
+                            <input id="filmId" name="filmId" type="checkbox"
+                                    th:value="${film.filmId}">
+                            <label for="filmId" th:text="${film.title}"></label>
+                        </div>
+                    </li>
+                </ul>
+
+                <div class="field">
+                    <button class="ui button" type="submit">Submit</button>
                 </div>
             </form>
         </div>

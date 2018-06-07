@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.validation.Valid;
@@ -53,10 +54,12 @@ public class LoanMvcController {
     }
 
     @PostMapping("/loan-add")
-    public String addLoan(Model model, @Valid List<FilmEntity> filmList /*, @Valid Long Id*/) {
+    public String addLoan(Model model, /*@Valid*/ @ModelAttribute("selectedFilms") FilmEntity selectedFilms /*, @Valid Long Id*/) {
         try {
-            System.out.println(filmList);
-            //loanService.createLoan(Id, filmList);
+            System.out.println(selectedFilms + " " + selectedFilms.getFilmId());
+
+
+            //loanService.createLoan(Id, selectedFilms);
             model.addAttribute("loanList", loanService.findLoans());
         } catch (Exception e) {
             model.addAttribute("Error: ", e.getMessage());
